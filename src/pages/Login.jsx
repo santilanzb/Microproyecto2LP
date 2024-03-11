@@ -52,7 +52,7 @@ function Login() {
             <h2>Iniciar sesión</h2>
             <input
                 type="text"
-                placeholder="Nombre de usuario"
+                placeholder="Email"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
             />
