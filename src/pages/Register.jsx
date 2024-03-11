@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { auth, googleProvider, db, signInWithPopup, createUserWithEmailAndPassword } from '/firebase.js';
 import { addDoc, collection } from 'firebase/firestore';
 import './Register.css';

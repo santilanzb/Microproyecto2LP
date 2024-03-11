@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Login from './pages/Login';
 import RegisterView from './pages/Register.jsx';
 
@@ -18,14 +18,10 @@ function App() {
                     </ul>
                 </nav>
 
-                <Switch>
-                    <Route path="/register">
-                        <RegisterView />
-                    </Route>
-                    <Route path="/login">
-                        <Login />
-                    </Route>
-                </Switch>
+                <Routes>
+                    <Route path="/register" element={<RegisterView />} />
+                    <Route path="/login" element={<Login />} />
+                </Routes>
             </div>
         </Router>
     );
