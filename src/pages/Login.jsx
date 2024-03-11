@@ -12,22 +12,24 @@ function Login() {
         // y actualizar el estado loggedIn en consecuencia.
     }, []);
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
         // Verificar si los campos están vacíos
         if (!username || !password) {
             setError('Por favor, complete todos los campos.');
             return;
         }
 
-        // Aquí podrías agregar lógica para enviar las credenciales del usuario al servidor
-        // para autenticación. Por ahora, simplemente imprimiremos las credenciales en la consola.
-        console.log('Username:', username);
-        console.log('Password:', password);
-
-        // Simulamos un inicio de sesión exitoso estableciendo loggedIn en true.
-        setLoggedIn(true);
-        // Limpiar el mensaje de error
-        setError('');
+        try {
+            // Authenticate the user with Firebase
+            await signInWithEmailAndPassword(auth, username, password);
+            // If the authentication is successful, the user is logged in
+            setLoggedIn(true);
+            // Clear the error message
+            setError('');
+        } catch (error) {
+            // If there's an error (e.g., invalid credentials), display an error message
+            setError('Invalid credentials. Please try again.');
+        }
     };
 
     return (
