@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth, googleProvider, db, signInWithPopup, createUserWithEmailAndPassword } from '/firebase.js';
-import { addDoc, collection } from 'firebase/firestore';
+import { setDoc, doc } from 'firebase/firestore';
 import './Register.css';
 import { MessageContext } from '../MessageContext';
 import { updateProfile } from 'firebase/auth';
@@ -67,7 +67,7 @@ function RegisterView() {
                 name: name,
                 favoriteGame: favoriteGame
             };
-            await addDoc(collection(db, 'users'), userDoc);
+            await setDoc(doc(db, 'users', userCredential.user.uid), userDoc); // Change this line
             console.log('User added to Firestore');
 
             setMessage('Registration successful!');

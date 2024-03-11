@@ -3,12 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { getDoc, doc } from 'firebase/firestore';
 import './Login.css';
+import { auth, googleProvider, db } from '/firebase.js';
 
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loggedIn, setLoggedIn] = useState(false); // Add this line
     const navigate = useNavigate();
+
 
     const handleLogin = async () => {
         // Check if the fields are empty
@@ -28,11 +31,18 @@ function Login() {
                 return;
             }
 
-            // If the authentication is successful and the user exists in Firestore, navigate to the clubs page
-            navigate('/clubs');
+            // If the authentication is successful and the user exists in Firestore, navigate to the Homepage
+            navigate('/Homepage'); // Change this line
+            setLoggedIn(true);
         } catch (error) {
             // If there's an error (e.g., invalid credentials), display an error message
-            setError('Invalid credentials. Please try again.');
+            if (error.code === 'auth/user-not-found') {
+                setError('No user found with this email.');
+            } else if (error.code === 'auth/wrong-password') {
+                setError('Incorrect password.');
+            } else {
+                setError('Invalid credentials. Please try again.');
+            }
         }
     };
 

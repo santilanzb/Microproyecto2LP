@@ -1,0 +1,57 @@
+/* ClubPage.css */
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.club-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.club-header h2 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.club-description {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.videojuegos-container {
+    margin-top: 30px;
+}
+
+.videojuegos-header {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.videojuego-card {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.videojuego-content {
+    padding: 20px;
+}
+
+.videojuego-title {
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.videojuego-description {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
