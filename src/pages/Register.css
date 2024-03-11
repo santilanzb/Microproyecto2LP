@@ -36,3 +36,11 @@
 .register-form button:hover {
     background-color: #0056b3;
 }
+
+.register-form p {
+    color: green; /* Color for success message */
+}
+
+.register-form p.error {
+    color: red; /* Color for error message */
+}

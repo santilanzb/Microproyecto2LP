@@ -1,36 +1,41 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { getDoc, doc } from 'firebase/firestore';
 import './Login.css';
 
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [loggedIn, setLoggedIn] = useState(false);
     const [error, setError] = useState('');
-
-    useEffect(() => {
-        // Aquí podrías agregar lógica para verificar si el usuario ya está autenticado
-        // y actualizar el estado loggedIn en consecuencia.
-    }, []);
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
-        // Verificar si los campos están vacíos
+        // Check if the fields are empty
         if (!username || !password) {
-            setError('Por favor, complete todos los campos.');
+            setError('Please fill in all fields.');
             return;
         }
 
         try {
             // Authenticate the user with Firebase
-            await signInWithEmailAndPassword(auth, username, password);
-            // If the authentication is successful, the user is logged in
-            setLoggedIn(true);
-            // Clear the error message
-            setError('');
+            const userCredential = await signInWithEmailAndPassword(auth, username, password);
+
+            // Check if the user exists in Firestore
+            const userDoc = await getDoc(doc(db, 'users', userCredential.user.uid));
+            if (!userDoc.exists()) {
+                setError('User not found in Firestore.');
+                return;
+            }
+
+            // If the authentication is successful and the user exists in Firestore, navigate to the clubs page
+            navigate('/clubs');
         } catch (error) {
             // If there's an error (e.g., invalid credentials), display an error message
             setError('Invalid credentials. Please try again.');
         }
     };
+
 
     return (
         <div className="login-container">

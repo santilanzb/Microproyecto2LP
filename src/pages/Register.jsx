@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { auth, googleProvider, db, signInWithPopup, createUserWithEmailAndPassword } from '/firebase.js';
 import { addDoc, collection } from 'firebase/firestore';
 import './Register.css';
+import { MessageContext } from '../MessageContext';
+import { updateProfile } from 'firebase/auth';
 
 function RegisterView() {
     const [email, setEmail] = useState('');
@@ -10,6 +13,9 @@ function RegisterView() {
     const [name, setName] = useState('');
     const [favoriteGame, setFavoriteGame] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+    const [shouldNavigate, setShouldNavigate] = useState(false);
+    const { setMessage } = useContext(MessageContext);
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -30,6 +36,13 @@ function RegisterView() {
         setFavoriteGame(event.target.value);
     };
 
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (shouldNavigate) {
+            navigate('/Homepage');
+        }
+    }, [shouldNavigate]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -42,7 +55,7 @@ function RegisterView() {
             console.log(`Form submitted with email: ${email}`);
             console.log('User registered with Firebase Auth:', userCredential.user);
 
-            await userCredential.user.updateProfile({
+            await updateProfile(userCredential.user, {
                 displayName: name,
             });
             console.log('User profile updated');
@@ -56,6 +69,12 @@ function RegisterView() {
             };
             await addDoc(collection(db, 'users'), userDoc);
             console.log('User added to Firestore');
+
+            setMessage('Registration successful!');
+            setTimeout(() => {
+                setShouldNavigate(true); // Set shouldNavigate to true after 2 seconds
+            }, 2000);// Set success message
+
         } catch (error) {
             console.error(error);
         }
@@ -93,7 +112,8 @@ function RegisterView() {
                 Favorite Game:
                 <input type="text" value={favoriteGame} onChange={handleFavoriteGameChange} required />
             </label>
-            {errorMessage && <p>{errorMessage}</p>}
+            {errorMessage && <p className="error">{errorMessage}</p>}
+            {successMessage && <p>{successMessage}</p>} {/* Display success message */}
             <button type="submit">Register</button>
             <button type="button" onClick={handleGoogleSignIn}>Register with Google</button>
         </form>

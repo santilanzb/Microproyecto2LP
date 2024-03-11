@@ -1,51 +1,24 @@
-import React from 'react';
-<<<<<<< HEAD
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Homepage from './pages/Homepage';
-import ClubPage from './pages/Club';
-
-function App() {
-    return (
-        <Router>
-            <div>
-                <Routes>
-                    <Route path="/" element={<Homepage />} />
-                    <Route path="/clubs/:clubId" element={<ClubPage />} />
-                </Routes>
-            </div>
-        </Router>
-/* =======
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { AuthProvider } from './AuthContext';
-import ProtectedRoute from './ProtectedRoute';
-import Login from './pages/Login';
 import RegisterView from './pages/Register.jsx';
+import HomePage from './pages/Homepage.jsx'; // Import the HomePage component
+import { MessageContext } from './MessageContext';
 
 function App() {
+    const [message, setMessage] = useState('');
+
     return (
         <AuthProvider>
-            <Router>
-                <div>
-                    <nav>
-                        <ul>
-                            <li>
-                                <Link to="/register">Register</Link>
-                            </li>
-                            <li>
-                                <Link to="/login">Login</Link>
-                            </li>
-                        </ul>
-                    </nav>
-
+            <MessageContext.Provider value={{ message, setMessage }}>
+                <Router>
                     <Routes>
-                        <Route path="/register" element={<RegisterView />} />
-                        <Route path="/login" element={<Login />} />
-                        <ProtectedRoute path="/protected" element={<ProtectedComponent />} />
+                        <Route path="/" element={<RegisterView />} />
+                        <Route path="/Homepage" element={<HomePage />} /> {/* Add this line */}
                     </Routes>
-                </div>
-            </Router>
+                </Router>
+            </MessageContext.Provider>
         </AuthProvider>
->>>>>>> e64524f5212b3ce600eaffcc965df58cf70c3e8a */
     );
 }
 
