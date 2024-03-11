@@ -8,6 +8,7 @@ function RegisterView() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [name, setName] = useState('');
+    const [favoriteGame, setFavoriteGame] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleEmailChange = (event) => {
@@ -25,6 +26,10 @@ function RegisterView() {
     const handleConfirmPasswordChange = (event) => {
         setConfirmPassword(event.target.value);
     }
+    const handleFavoriteGameChange = (event) => {
+        setFavoriteGame(event.target.value);
+    };
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -47,6 +52,7 @@ function RegisterView() {
                 uid: userCredential.user.uid,
                 email: email,
                 name: name,
+                favoriteGame: favoriteGame
             };
             await addDoc(collection(db, 'users'), userDoc);
             console.log('User added to Firestore');
@@ -82,6 +88,10 @@ function RegisterView() {
             <label>
                 Name:
                 <input type="text" value={name} onChange={handleNameChange} required />
+            </label>
+            <label>
+                Favorite Game:
+                <input type="text" value={favoriteGame} onChange={handleFavoriteGameChange} required />
             </label>
             {errorMessage && <p>{errorMessage}</p>}
             <button type="submit">Register</button>

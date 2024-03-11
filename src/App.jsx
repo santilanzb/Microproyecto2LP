@@ -1,26 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Login from './pages/Login';
-import RegisterView from './pages/Register.jsx';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Homepage from './pages/Homepage';
+import ClubPage from './pages/Club';
 
 function App() {
     return (
         <Router>
             <div>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to="/register">Register</Link>
-                        </li>
-                        <li>
-                            <Link to="/login">Login</Link>
-                        </li>
-                    </ul>
-                </nav>
-
                 <Routes>
-                    <Route path="/register" element={<RegisterView />} />
-                    <Route path="/login" element={<Login />} />
+                    <Route path="/" element={<Homepage />} />
+                    <Route path="/clubs/:clubId" element={<ClubPage />} />
                 </Routes>
             </div>
         </Router>
