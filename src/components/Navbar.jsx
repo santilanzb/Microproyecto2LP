@@ -13,6 +13,12 @@ function Navbar() {
                     <Link to="/login" className="nav-link">Log In</Link>
                 </>
             )}
+            {(location.pathname === '/Homepage' || location.pathname === '/Search') && (
+                <>
+                    <Link to="/Homepage" className="nav-link">Home</Link>
+                    <Link to="/Search" className="nav-link">Videogames</Link> {/* Change this line */}
+                </>
+            )}
         </nav>
     );
 }

@@ -7,6 +7,7 @@ import Login from './pages/Login.jsx';
 import Navbar from './components/Navbar.jsx';
 import LandingPage from './components/Landingpage.jsx';
 import ClubPage from './pages/Club.jsx';
+import SearchView from './pages/Search.jsx'; // Import the SearchView component
 import { MessageContext } from './MessageContext';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
                         <Route path="/Homepage" element={<HomePage />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/clubs/:clubId" element={<ClubPage />} /> {/* Ruta para ClubPage con parámetro clubId */}
+                        <Route path="/Search" element={<SearchView />} /> {/* Add this line */}
                     </Routes>
                 </Router>
             </MessageContext.Provider>
