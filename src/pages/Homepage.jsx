@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import clubData from '../data/clubdata.json';
-import './Homepage.css'; // Importamos el archivo CSS para aplicar los estilos
+import './Homepage.css'; 
 
 function HomePage() {
     return (
@@ -14,7 +14,6 @@ function HomePage() {
                             <h3 className="club-title">{club.nombre}</h3>
                             <p className="club-description">{club.descripcion}</p>
                             <Link to={`/clubs/${club.ID}`} className="club-link">Ver Club</Link>
-                            <button className="subscribe-button">Subscribe</button>
                         </div>
                     </div>
                 ))}
@@ -24,3 +23,4 @@ function HomePage() {
 }
 
 export default HomePage;
+

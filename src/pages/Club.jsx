@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import clubData from '../data/clubdata.json';
 import videoGameData from '../data/videoGameData.json';
-import './ClubPage.css'; // Importamos el archivo CSS para aplicar los estilos
+import './ClubPage.css'; 
 
 function ClubPage() {
     const { clubId } = useParams();
