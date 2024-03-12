@@ -13,10 +13,11 @@ function Navbar() {
                     <Link to="/login" className="nav-link">Log In</Link>
                 </>
             )}
-            {(location.pathname === '/Homepage' || location.pathname === '/Search') && (
+            {(location.pathname === '/Homepage' || location.pathname === '/Search' || location.pathname === '/profile') && (
                 <>
                     <Link to="/Homepage" className="nav-link">Home</Link>
-                    <Link to="/Search" className="nav-link">Videogames</Link> {/* Change this line */}
+                    <Link to="/Search" className="nav-link">Videogames</Link>
+                    <Link to="/profile" className="nav-link">Profile</Link> {/* Add this line */}
                 </>
             )}
         </nav>

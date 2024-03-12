@@ -8,6 +8,7 @@ import Navbar from './components/Navbar.jsx';
 import LandingPage from './components/Landingpage.jsx';
 import ClubPage from './pages/Club.jsx';
 import SearchView from './pages/Search.jsx'; // Import the SearchView component
+import Profile from './pages/Profile.jsx';
 import { MessageContext } from './MessageContext';
 
 function App() {
@@ -18,7 +19,6 @@ function App() {
     useEffect(() => {
         localStorage.setItem('isLandingPage', isLandingPage);
     }, [isLandingPage]);
-
 
     return (
         <AuthProvider>
@@ -32,6 +32,7 @@ function App() {
                         <Route path="/login" element={<Login />} />
                         <Route path="/clubs/:clubId" element={<ClubPage />} /> {/* Ruta para ClubPage con parámetro clubId */}
                         <Route path="/Search" element={<SearchView />} /> {/* Add this line */}
+                        <Route path="/profile" element={<Profile />} />
                     </Routes>
                 </Router>
             </MessageContext.Provider>
