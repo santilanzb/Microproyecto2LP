@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { getDoc, doc } from 'firebase/firestore';
 import './Login.css';
-import { auth, googleProvider, db } from '/firebase.js';
+import { auth, googleProvider, db, signInWithPopup } from '/firebase.js';
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -46,6 +46,29 @@ function Login() {
         }
     };
 
+    const handleGoogleSignIn = async () => {
+        try {
+            const result = await signInWithPopup(auth, googleProvider);
+            // User is signed in. You can get the user info from the returned result.
+            const user = result.user;
+
+            // Check if the user exists in Firestore
+            const userDoc = await getDoc(doc(db, 'users', user.uid));
+            if (!userDoc.exists()) {
+                setError('User not found in Firestore.');
+                return;
+            }
+
+            // Navigate to the homepage
+            navigate('/Homepage');
+        } catch (error) {
+            // Handle errors here.
+            console.error(error);
+        }
+    };
+
+
+
 
     return (
         <div className="login-container">
@@ -63,6 +86,7 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
             />
             <button onClick={handleLogin}>Iniciar sesión</button>
+            <button onClick={handleGoogleSignIn}>Iniciar sesión con Google</button>
             {error && <p className="error-message">{error}</p>}
             {loggedIn && <p className="success-message">¡Has iniciado sesión correctamente!</p>}
         </div>

@@ -5,6 +5,7 @@ import { setDoc, doc } from 'firebase/firestore';
 import './Register.css';
 import { MessageContext } from '../MessageContext';
 import { updateProfile } from 'firebase/auth';
+import Modal from '../components/Modal';
 
 function RegisterView() {
     const [email, setEmail] = useState('');
@@ -16,6 +17,7 @@ function RegisterView() {
     const [successMessage, setSuccessMessage] = useState('');
     const [shouldNavigate, setShouldNavigate] = useState(false);
     const { setMessage } = useContext(MessageContext);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -82,12 +84,35 @@ function RegisterView() {
 
     const handleGoogleSignIn = async () => {
         try {
-            await signInWithPopup(auth, googleProvider);
+            const result = await signInWithPopup(auth, googleProvider);
             // User is signed in. You can get the user info from the returned result.
+            const user = result.user;
+
+            // Open the modal to prompt the user to enter their favorite game
+            setIsModalOpen(true);
+
         } catch (error) {
             // Handle errors here.
             console.error(error);
         }
+    };
+
+    const handleModalSubmit = async (favoriteGame) => {
+        // Add the user to Firestore
+        const userDoc = {
+            uid: auth.currentUser.uid,
+            email: auth.currentUser.email,
+            name: auth.currentUser.displayName,
+            favoriteGame: favoriteGame
+        };
+        await setDoc(doc(db, 'users', auth.currentUser.uid), userDoc);
+        console.log('User added to Firestore');
+
+        // Close the modal
+        setIsModalOpen(false);
+
+        // Navigate to the homepage
+        navigate('/Homepage');
     };
 
     return (
@@ -127,6 +152,9 @@ function RegisterView() {
             <button onClick={handleGoogleSignIn}>Register with Google</button>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             {successMessage && <p className="success-message">You have successfully registered!</p>}
+            {isModalOpen && (
+                <Modal onSubmit={handleModalSubmit} onClose={() => setIsModalOpen(false)} />
+            )}
         </div>
     );
 }
