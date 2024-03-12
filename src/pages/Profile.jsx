@@ -3,7 +3,7 @@ import { useAuth } from '../AuthContext';
 import { getDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '/firebase.js';
 import './Profile.css';
-import { updateProfile } from 'firebase/auth'; // Agregar esta importación
+import { updateProfile } from 'firebase/auth';
 
 function Profile() {
     const { currentUser } = useAuth();
@@ -38,14 +38,14 @@ function Profile() {
 
     const handleUpdateProfile = async () => {
         try {
-            // Actualiza el perfil en Firestore
+            // Update the profile in Firestore
             await updateDoc(doc(db, 'users', currentUser.uid), {
                 name: name,
                 email: email,
                 favoriteGame: favoriteGame
             });
 
-            // Actualiza el perfil en Firebase Authentication
+            // Update the profile in Firebase Authentication
             await updateProfile(currentUser, {
                 displayName: name,
                 email: email,
@@ -67,18 +67,22 @@ function Profile() {
             <div className="profile-info">
                 <div>
                     <label>Nombre:</label>
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
                 </div>
                 <div>
                     <label>Email:</label>
-                    <input type="email" value={email} disabled />
+                    <input type="email" value={email} disabled/>
                 </div>
                 <div>
                     <label>Juego favorito:</label>
-                    <input type="text" value={favoriteGame} onChange={(e) => setFavoriteGame(e.target.value)} />
+                    <input type="text" value={favoriteGame} onChange={(e) => setFavoriteGame(e.target.value)}/>
+                </div>
+                <div>
+                    <label>Club ID:</label>
+                    <p>{userData.clubId ? `Club ID: ${userData.clubId}` : 'No Club ID'}</p> {/* Display the club ID here */}
                 </div>
             </div>
-            <button className= "btn-update" onClick={handleUpdateProfile}>Actualizar</button>
+            <button className="btn-update" onClick={handleUpdateProfile}>Actualizar</button>
             {error && <p className="error-message">{error}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}
         </div>

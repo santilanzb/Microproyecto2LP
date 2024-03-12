@@ -10,7 +10,7 @@ function LandingPage({ setIsLandingPage }) { // Add setIsLandingPage as a prop
 
     return (
         <div className="landing-container">
-            <h1>Welcome to our site!</h1>
+            <h1>Microproyecto2</h1>
             <Link to="/register" className="landing-button" onClick={() => setIsLandingPage(false)}>Register</Link>
             <Link to="/login" className="landing-button" onClick={() => setIsLandingPage(false)}>Log In</Link>
         </div>
