@@ -91,32 +91,43 @@ function RegisterView() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="register-form">
-            <label>
-                Email:
-                <input type="email" value={email} onChange={handleEmailChange} required />
-            </label>
-            <label>
-                Password:
-                <input type="password" value={password} onChange={handlePasswordChange} required />
-            </label>
-            <label>
-                Confirm Password:
-                <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} required />
-            </label>
-            <label>
-                Name:
-                <input type="text" value={name} onChange={handleNameChange} required />
-            </label>
-            <label>
-                Favorite Game:
-                <input type="text" value={favoriteGame} onChange={handleFavoriteGameChange} required />
-            </label>
-            {errorMessage && <p className="error">{errorMessage}</p>}
-            {successMessage && <p>{successMessage}</p>} {/* Display success message */}
-            <button type="submit">Register</button>
-            <button type="button" onClick={handleGoogleSignIn}>Register with Google</button>
-        </form>
+        <div className="register-form">
+            <h2>Register</h2>
+            <input
+                type="text"
+                placeholder="Email"
+                value={email}
+                onChange={handleEmailChange}
+            />
+            <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={handlePasswordChange}
+            />
+            <input
+                type="password"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={handleConfirmPasswordChange}
+            />
+            <input
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={handleNameChange}
+            />
+            <input
+                type="text"
+                placeholder="Favorite Game"
+                value={favoriteGame}
+                onChange={handleFavoriteGameChange}
+            />
+            <button onClick={handleSubmit}>Register</button>
+            <button onClick={handleGoogleSignIn}>Register with Google</button>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            {successMessage && <p className="success-message">You have successfully registered!</p>}
+        </div>
     );
 }
 

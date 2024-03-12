@@ -1,12 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Navbar.css'; // Import the CSS file for styling
+import './Navbar.css';
 
-function Navbar() {
+function Navbar({ isLandingPage }) {
     return (
         <nav className="navbar">
-            <Link to="/" className="nav-link">Register</Link>
-            <Link to="/login" className="nav-link">Login</Link>
+            {!isLandingPage && (
+                <>
+                    <Link to="/register" className="nav-link">Register</Link>
+                    <Link to="/login" className="nav-link">Log In</Link>
+                </>
+            )}
         </nav>
     );
 }
