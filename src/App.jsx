@@ -6,6 +6,7 @@ import HomePage from './pages/Homepage.jsx';
 import Login from './pages/Login.jsx';
 import Navbar from './components/Navbar.jsx';
 import ClubPage from './pages/Club.jsx';
+import Profile from './pages/Profile.jsx';
 import { MessageContext } from './MessageContext';
 
 function App() {
@@ -18,9 +19,10 @@ function App() {
                     <Navbar />
                     <Routes>
                         <Route path="/" element={<RegisterView />} />
-                        <Route path="/Homepage" element={<HomePage />} /> {/* Ensure this line matches the path in your navigate function */}
+                        <Route path="/Homepage" element={<HomePage />} /> 
                         <Route path="/login" element={<Login />} />
-                        <Route path="/clubs/:clubId" element={<ClubPage />} /> {/* Ruta para ClubPage con parámetro clubId */}
+                        <Route path="/clubs/:clubId" element={<ClubPage />} /> 
+                        <Route path="/profile" element={<Profile />} />
                     </Routes>
                 </Router>
             </MessageContext.Provider>

@@ -13,11 +13,12 @@ function HomePage() {
                         <div className="club-content">
                             <h3 className="club-title">{club.nombre}</h3>
                             <p className="club-description">{club.descripcion}</p>
-                            <Link to={`/clubs/${club.ID}`} className="club-link">Ver Club</Link>
+                            <Link to={`/clubs/${club.ID}`} className="club-link">Más Info</Link>
                         </div>
                     </div>
                 ))}
             </div>
+            <Link to="/profile" className="profile-link">Perfil</Link>
         </div>
     );
 }
