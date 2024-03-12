@@ -72,3 +72,27 @@
 .subscribe-button:hover {
     background-color: #218838;
 }
+
+.profile-button {
+    background-color: #007bff; 
+    color: white; 
+    border: none; 
+    padding: 15px 30px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    text-decoration: none; 
+    display: inline-block; 
+}
+
+.profile-button:hover {
+    background-color: #0056b3; 
+}
+
+.profile-link {
+    color: white; 
+    text-decoration: none; 
+}
+
+.profile-link:hover {
+    text-decoration: underline; 
+}
