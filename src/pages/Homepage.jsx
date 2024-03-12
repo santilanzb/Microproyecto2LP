@@ -10,11 +10,13 @@ function HomePage() {
     const { currentUser, subscribedClubId, setSubscribedClubId } = useAuth();
 
     const handleSubscribe = async (clubId) => {
+        console.log('handleSubscribe called with clubId:', clubId); // Add this line
         try {
             await updateDoc(doc(db, 'users', currentUser.uid), {
                 clubId: clubId
             });
             setSubscribedClubId(clubId); // Update subscribedClubId state after Firestore document
+            console.log('subscribedClubId after update:', subscribedClubId); // Add this line
         } catch (error) {
             console.error('Error updating club subscription.', error);
         }
@@ -45,7 +47,7 @@ function HomePage() {
                                 {subscribedClubId === club.ID ? (
                                     <button onClick={handleUnsubscribe} className="unsubscribe-button">Unsubscribe</button>
                                 ) : (
-                                    <button onClick={() => handleSubscribe(club.ID)} className="subscribe-button" disabled={subscribedClubId !== null}>Subscribe</button>
+                                    <button onClick={() => handleSubscribe(club.ID)} className="subscribe-button">Subscribe</button>
                                 )}
                             </div>
                         </div>
